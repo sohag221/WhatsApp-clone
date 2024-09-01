@@ -55,7 +55,7 @@
             android:padding="9dp"
             />
         <TextView
-            android:id="@+id/signup"
+            android:id="@+id/clickForSingUP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Click for sing up"
@@ -65,7 +65,7 @@
             />
 
         <Button
-            android:id="@+id/singIn_bt"
+            android:id="@+id/LogIn_bt"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
