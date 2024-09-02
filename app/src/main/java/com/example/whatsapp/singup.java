@@ -45,6 +45,7 @@ public class singup extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
+
         progressDialog = new ProgressDialog(singup.this);
         progressDialog.setTitle("Creating Account");
         progressDialog.setMessage("Please, wait....!");
@@ -154,12 +155,12 @@ public class singup extends AppCompatActivity {
                     progressDialog.dismiss();
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
-                        Users users = new Users(account.getDisplayName(), account.getEmail(), "");
+                        Users users = new Users(account.getDisplayName(), account.getEmail(), account.getPhotoUrl().toString());
                         String id = task.getResult().getUser().getUid();
                         database.getReference().child("Users").child(id).setValue(users);
 
                         // Navigate to the next screen
-                        Intent intent = new Intent(singup.this, singin.class);
+                        Intent intent = new Intent(singup.this, MainActivity.class);
                         startActivity(intent);
                         finish(); // Close the signup activity to avoid returning to it
                     } else {
@@ -169,4 +170,7 @@ public class singup extends AppCompatActivity {
                     }
                 });
     }
+
+
+
 }

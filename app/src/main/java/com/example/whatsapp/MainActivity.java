@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.example.whatsapp.Adapters.FragmentsAdapter;
 import com.example.whatsapp.R;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -25,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     FirebaseAuth auth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         auth = FirebaseAuth.getInstance();
+        binding.viewPager.setAdapter(new FragmentsAdapter((getSupportFragmentManager())));
+        binding.tabLayout.setupWithViewPager(binding.viewPager);
     }
 
 
