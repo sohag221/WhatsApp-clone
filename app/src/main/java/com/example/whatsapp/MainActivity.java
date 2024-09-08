@@ -15,6 +15,7 @@ import com.example.whatsapp.R;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -43,39 +44,34 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         binding.viewPager.setAdapter(new FragmentsAdapter((getSupportFragmentManager())));
         binding.tabLayout.setupWithViewPager(binding.viewPager);
+
+        Toolbar toolbar = findViewById(id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+
     }
 
-
-
-/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.toolbar_menu,menu);
+
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case id.setting:
-                // Navigate to the settings activity
-                Toast.makeText(this, "Setting clicked!", Toast.LENGTH_SHORT).show();
-                break;
-
-            case id.logout:
-                // Log out the user and navigate to the login activity
-                auth.signOut();
-                Intent logoutIntent = new Intent(this, singup.class);
-                startActivity(logoutIntent);
-                finish();  // Optional: Finish the current activity so that the user can't go back to it
-                Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-        return true;
-    }*/
-
+       int id = item.getItemId();
+       if (id==R.id.setting){
+           Toast.makeText(this, "Setting is clicked", Toast.LENGTH_SHORT).show();
+       }if (id== R.id.log_out){
+           Toast.makeText(this, "Log out is clicked", Toast.LENGTH_SHORT).show();
+       }if (id==R.id.search){
+           Toast.makeText(this, "Search is clicked", Toast.LENGTH_SHORT).show();
+       }if (id== R.id.camera){
+           Toast.makeText(this, "Camera is clicked", Toast.LENGTH_SHORT).show();
+       }
+       return true;
+    }
 }

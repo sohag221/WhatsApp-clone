@@ -8,6 +8,19 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar"
+            android:background="@color/colorPrimaryDark"
+            app:logo="@drawable/whatsapp_logo"
+            app:title="WhatsApp"
+            app:titleMarginStart="30dp"
+            app:titleTextColor="@color/white"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+/>
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
@@ -17,6 +30,7 @@
             android:elevation="12dp"
             app:tabGravity="fill"
             app:tabMaxWidth="0dp"
+            app:tabTextColor="@color/lightGray"
             app:tabIndicatorColor="@color/white"
             app:tabSelectedTextColor="@color/white"/>
 
