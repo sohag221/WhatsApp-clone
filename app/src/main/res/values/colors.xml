@@ -15,7 +15,7 @@
     <color name="whatsAppColor">#0b6156</color>
     <color name="red">#F20808</color>
     <color name="statusBackground">#009688</color>
-    <color name="chatBackground">#8BC34A</color>\
+    <color name="chatBackground">@color/lightGray</color>\
     <color name="fb_color">#3c5793</color>
     <color name="black">#0C0C0D</color>
     <color name="lightGreen">#e5ffcc</color>

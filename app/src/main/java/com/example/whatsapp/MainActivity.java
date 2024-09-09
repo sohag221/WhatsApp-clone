@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.whatsapp.Adapters.FragmentsAdapter;
@@ -48,15 +50,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(id.toolbar);
         setSupportActionBar(toolbar);
 
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
 
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.toolbar_menu,menu);
-
         return true;
     }
 
@@ -66,7 +69,13 @@ public class MainActivity extends AppCompatActivity {
        if (id==R.id.setting){
            Toast.makeText(this, "Setting is clicked", Toast.LENGTH_SHORT).show();
        }if (id== R.id.log_out){
-           Toast.makeText(this, "Log out is clicked", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Log out is clicked", Toast.LENGTH_SHORT).show();
+            FirebaseAuth.getInstance().signOut();
+            // After logging out, you may want to redirect the user to the login screen
+            Intent intent = new Intent(this, singin.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
        }if (id==R.id.search){
            Toast.makeText(this, "Search is clicked", Toast.LENGTH_SHORT).show();
        }if (id== R.id.camera){

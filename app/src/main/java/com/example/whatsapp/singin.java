@@ -42,8 +42,9 @@ public class singin extends AppCompatActivity {
             return insets;
         });
 
-        getSupportActionBar().hide();
-
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         auth= FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(singin.this);

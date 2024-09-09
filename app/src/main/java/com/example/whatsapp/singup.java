@@ -41,9 +41,18 @@ public class singup extends AppCompatActivity {
         binding = ActivitySingupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null) {
+            // User is already logged in, navigate to MainActivity
+            Intent intent = new Intent(singup.this, MainActivity.class);
+            startActivity(intent);
+            finish(); // Close the signup activity
+            return; // Stop further execution
+        }
         database = FirebaseDatabase.getInstance();
 
         progressDialog = new ProgressDialog(singup.this);
