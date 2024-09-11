@@ -16,7 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.whatsapp.Adapters.ChatAdapter;
-import com.example.whatsapp.databinding.ActivityChatDetailBinding;
+import com.example.whatsapp.databinding.ActivityGroupChatBinding;
 import com.example.whatsapp.model.MessageModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,80 +24,67 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class chatDetailActivity extends AppCompatActivity {
+public class GroupChatActivity extends AppCompatActivity {
 
-    FirebaseDatabase database;
-    FirebaseAuth auth;
-    ActivityChatDetailBinding binding;
+    ActivityGroupChatBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding = ActivityChatDetailBinding.inflate(getLayoutInflater());
+
+        binding=ActivityGroupChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
 
-        database = FirebaseDatabase.getInstance();
-        auth = FirebaseAuth.getInstance();
-
-       final String senderId = auth.getUid();
-        String recieverId = getIntent().getStringExtra("userId");
-        String userName = getIntent().getStringExtra("userName");
-        String profilePic = getIntent().getStringExtra("profilePic");
-
-        binding.userName.setText(userName);
-        Picasso.get().load(profilePic).placeholder(R.drawable.avatar).into(binding.profileImage);
-
-
         binding.backarrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(chatDetailActivity.this,MainActivity.class);
+                Intent intent = new Intent(GroupChatActivity.this,MainActivity.class);
                 startActivity(intent);
             }
         });
 
 
-
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final ArrayList<MessageModel> messageModels = new ArrayList<>();
-        final ChatAdapter chatadapter = new ChatAdapter(messageModels,this);
+
+        final String senderId= FirebaseAuth.getInstance().getUid();
+        binding.userName.setText("Group Chat");
 
 
+        final ChatAdapter chatAdapter = new ChatAdapter(messageModels,this);
+        binding.chatRecyclerView.setAdapter(chatAdapter);
 
-
-        binding.chatRecyclerView.setAdapter(chatadapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.chatRecyclerView.setLayoutManager(layoutManager);
 
-        final String senderRoom = senderId + recieverId;
-        final String receiverRoom = recieverId + senderId;
-
-
-        database.getReference().child("chats")
-                .child(senderRoom)
-                .addValueEventListener(new ValueEventListener() {
+        database.getReference().child("Group Chat")
+                        .addValueEventListener(new ValueEventListener() {
                             @SuppressLint("NotifyDataSetChanged")
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 messageModels.clear();
-                                for (DataSnapshot snapshot1 : snapshot.getChildren()){
-                                    MessageModel model = snapshot1.getValue(MessageModel.class);
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                    MessageModel  model = dataSnapshot.getValue(MessageModel.class);
                                     messageModels.add(model);
                                 }
-                                chatadapter.notifyDataSetChanged();
+                                chatAdapter.notifyDataSetChanged();
                             }
 
                             @Override
@@ -106,36 +93,28 @@ public class chatDetailActivity extends AppCompatActivity {
                             }
                         });
 
-        binding.send.setOnClickListener(new View.OnClickListener() {
+         binding.send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = binding.editMessage.getText().toString();
+                final String message = binding.editMessage.getText().toString();
                 final MessageModel model = new MessageModel(senderId,message);
-
                 model.setTimestamp(new Date().getTime());
                 binding.editMessage.setText("");
 
-                database.getReference().child("chats")
-                        .child(senderRoom)
+                database.getReference().child("Group Chat")
                         .push()
                         .setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                database.getReference().child("chats")
-                                        .child(receiverRoom)
-                                        .push()
-                                        .setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
 
-
-                                            }
-                                        });
                             }
                         });
+
             }
         });
 
 
     }
+
+
 }

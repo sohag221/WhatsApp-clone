@@ -39,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5"
-
+            android:textSize="18sp"
             android:layout_margin="8dp"
             android:inputType="textMultiLine|textNoSuggestions"
             android:maxWidth="270dp"

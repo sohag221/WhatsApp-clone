@@ -17,7 +17,13 @@
         android:id="@+id/setting"
         />
     <item
+    android:title="Creat Group"
+    android:id="@+id/groupchat"
+    />
+    <item
         android:title="Log Out"
         android:id="@+id/log_out"
         />
+
+
 </menu>

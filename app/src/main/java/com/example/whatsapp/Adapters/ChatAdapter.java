@@ -15,14 +15,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class chatAdapter extends RecyclerView.Adapter {
+public class ChatAdapter extends RecyclerView.Adapter {
 
     ArrayList<MessageModel> MessageModels;
     Context context;
     int SENDER_VIEW_TYPE = 1;
     int RECEIVER_VIEW_TYPE = 2;
 
-    public chatAdapter(ArrayList<MessageModel> MessageModels, Context context) {
+    public ChatAdapter(ArrayList<MessageModel> MessageModels, Context context) {
         this.MessageModels = MessageModels;
         this.context = context;
     }

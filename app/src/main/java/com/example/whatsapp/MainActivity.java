@@ -80,7 +80,10 @@ public class MainActivity extends AppCompatActivity {
            Toast.makeText(this, "Search is clicked", Toast.LENGTH_SHORT).show();
        }if (id== R.id.camera){
            Toast.makeText(this, "Camera is clicked", Toast.LENGTH_SHORT).show();
-       }
+       }if (id==R.id.groupchat){
+           Intent intent = new Intent(this,GroupChatActivity.class);
+           startActivity(intent);
+        }
        return true;
     }
 }

@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DIALOG" />
-        <DropdownSelection timestamp="2024-09-08T18:44:18.833597400Z">
+        <DropdownSelection timestamp="2024-09-09T04:27:21.970429600Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=ZA222L83MZ" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\MD Sohag\.android\avd\Pixel_6_API_34.avd" />
             </handle>
           </Target>
         </DropdownSelection>
@@ -21,6 +21,16 @@
             <Target type="DEFAULT_BOOT">
               <handle>
                 <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\MD Sohag\.android\avd\Pixel_6_API_34_2.avd" />
+              </handle>
+            </Target>
+            <Target type="DEFAULT_BOOT">
+              <handle>
+                <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\MD Sohag\.android\avd\Pixel_6_API_34_3.avd" />
+              </handle>
+            </Target>
+            <Target type="DEFAULT_BOOT">
+              <handle>
+                <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\MD Sohag\.android\avd\Pixel_6_API_34_4.avd" />
               </handle>
             </Target>
           </targets>
