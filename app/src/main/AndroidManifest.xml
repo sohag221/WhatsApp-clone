@@ -16,6 +16,9 @@
         android:theme="@style/Theme.WhatsAPP"
         tools:targetApi="31">
         <activity
+            android:name=".SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".GroupChatActivity"
             android:exported="false" />
         <activity

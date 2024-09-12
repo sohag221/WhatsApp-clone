@@ -1,19 +1,17 @@
 package com.example.whatsapp;
 
 import static com.example.whatsapp.R.*;
-import static com.example.whatsapp.R.id.*;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.whatsapp.Adapters.FragmentsAdapter;
-import com.example.whatsapp.R;
+
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -67,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
        int id = item.getItemId();
        if (id==R.id.setting){
-           Toast.makeText(this, "Setting is clicked", Toast.LENGTH_SHORT).show();
+           Intent intent = new Intent(this,SettingActivity.class);
+           startActivity(intent);
        }if (id== R.id.log_out){
             Toast.makeText(this, "Log out is clicked", Toast.LENGTH_SHORT).show();
             FirebaseAuth.getInstance().signOut();
